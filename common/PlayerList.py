@@ -2,6 +2,9 @@ import csv
 import re
 import random
 from common import Player
+from common import Teams
+from common import DefenseList
+
 
 class PlayerList(object):
 
@@ -26,14 +29,24 @@ class PlayerList(object):
         all_players.append(player)
     return all_players
 
+  def adjust_for_defenses(self, defense_list):
+    ''' adjust for opponent defenses '''
+    for position in self._position_list:
+      for player in self._player_list[position]:
+        adjustment = defense_list.get_adjustment(player.get_opponent())
+        if player.get_position() not in ('D', 'K'):
+          new_value = player.get_value() * float(adjustment)
+          player.set_value(new_value)
+
   def read_from_draftday_csv(self, csv_path):
     """ read in the players from a draftday csv file """
     file_handler = open(csv_path, 'r')
     file_handler.next()  # skip header row
     csv_reader = csv.DictReader(file_handler, self.DRAFTDAY_FIELDS, ',')
     for line in csv_reader:
+      opponent = Teams.Teams().get_by_name(line['opp'])
       player = Player(line['player_name'], line['position'], 
-                      line['ppg'], line['salary'])
+                      line['ppg'], line['salary'], opponent)
       self.add_player(player)
 
   def get_random_player(self, position=None):

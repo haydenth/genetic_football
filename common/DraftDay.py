@@ -1,6 +1,6 @@
 import copy
 import random
-from common import PlayerList, Configuration
+from common import PlayerList, Configuration, DefenseList
 
 class DraftDay(object):
   SLOTS = ['QB', 'RB1', 'RB2', 'WR1', 'WR2', 'TE', 'FLEX', 'K', 'D']

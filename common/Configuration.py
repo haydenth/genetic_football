@@ -41,6 +41,6 @@ class Configuration(object):
     """ print out the roster in a nice format """
     print "========== %s ======= " % note
     for (slot, player) in self._configuration.items():
-      print "[%s] %s %s (%f, %s)" % (slot, player.get_name(), player.get_position(), 
-                                     player.get_value(), player.get_cost())
+      print "[%s] %s %s (%f, %s, %s)" % (slot, player.get_name(), player.get_position(), 
+                                     player.get_value(), player.get_cost(), player.get_opponent())
     print "Total Cost = %d Total Value = %f" % (self.get_cost(), self.get_value())
