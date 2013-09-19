@@ -1,6 +1,6 @@
 class Player(object):
 
-  def __init__(self, name, position, value, cost, opp=''):
+  def __init__(self, name, position='', value=0, cost=0, opp=''):
     self._position = position
     self._value = value
     self._name = name
