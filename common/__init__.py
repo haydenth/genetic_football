@@ -2,5 +2,8 @@ from Player import Player
 from PlayerList import PlayerList
 from Configuration import Configuration
 from DraftDay import DraftDay
-from Teams import Teams, TeamsException
+from Teams import Teams
+from Teams import TeamsException
 from DefenseList import DefenseList
+from CBSInjuries import CBSInjuries
+from Scraper import Scraper

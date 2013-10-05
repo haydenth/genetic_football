@@ -1,0 +1,43 @@
+11 bracket blitz
+--------------
+[FLEX] Wes Welker FLEX (19.722958, 12150, OAK)
+[D] Cowboys (Dal) D (16.500000, 5500, STL)
+[K] Dan Bailey K (14.300000, 5800, STL)
+[RB2] Adrian Peterson RB (20.838894, 16250, CLE)
+[RB1] Arian Foster RB (20.426170, 13000, BAL)
+[QB] Tom Brady QB (24.771215, 15100, TB)
+[WR2] Sidney Rice WR (11.124172, 5200, JAC)
+[WR1] Brandon Marshall WR (20.355879, 15650, PIT)
+[TE] Jason Witten TE (15.211638, 11350, STL)
+Total Cost = 100000 Total Value = 163.250926
+
+========== new max!! 574072 ======= 
+[FLEX] Arian Foster FLEX (20.426170, 13000, BAL)
+[D] Cowboys (Dal) D (16.500000, 5500, STL)
+[K] Dan Bailey K (14.300000, 5800, STL)
+[RB2] Knowshon Moreno RB (15.076737, 9200, OAK)
+[RB1] Adrian Peterson RB (20.838894, 16250, CLE)
+[QB] Tom Brady QB (24.771215, 15100, TB)
+[WR2] Wes Welker WR (19.722958, 12150, OAK)
+[WR1] Marques Colston WR (16.678174, 11550, ARI)
+[TE] Jason Witten TE (15.211638, 11350, STL)
+Total Cost = 99900 Total Value = 163.525786
+
+
+
+
+checkdown primetime (1)
+----------
+python simulate.py --file csv/2013-09-18-primetime.csv --override week3_projection.tsv
+
+========== new max!! 65111 ======= 
+[FLEX] Brandon Marshall FLEX (20.355879, 15650, PIT)
+[D] Chiefs (KC) D (17.000000, 5000, PHI)
+[K] Alex Henery K (11.400000, 5700, KC)
+[RB2] Knowshon Moreno RB (15.076737, 9200, OAK)
+[RB1] Darren McFadden RB (12.268255, 12000, DEN)
+[QB] Peyton Manning QB (25.284946, 20000, OAK)
+[WR2] Wes Welker WR (19.722958, 12150, OAK)
+[WR1] Eric Decker WR (15.694259, 9750, OAK)
+[TE] Julius Thomas TE (13.363492, 9550, OAK)
+Total Cost = 99000 Total Value = 150.166526

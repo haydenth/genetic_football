@@ -4,7 +4,7 @@ import random
 from common import Player
 from common import Teams
 from common import DefenseList
-
+from common import CBSInjuries
 
 class PlayerList(object):
 
@@ -34,6 +34,30 @@ class PlayerList(object):
 
   def get_position(self, pos):
     return self._player_list[pos]
+
+  def adjust_for_injuries(self, level=4):
+    ''' adjust for injuries based on levels
+    0 = remove ALL injured players
+    1 = remove only Doubtful, Out, Questionable, Prob
+    2 = remove only Doubtful, Out, Questionable
+    3 = remove only Doubtful, Out
+    4 = remove none '''
+    if level == 4:
+      return
+
+    injury_list = CBSInjuries.CBSInjuries().fetch()
+    for position in self._position_list:
+      for player in self._player_list[position]:
+        for record in injury_list:
+          if record['name'] == player.get_name():
+            if level == 0:
+              player.set_value(0)
+            if level == 1 and record['severity'] in ('DOUBTFUL', 'OUT', 'QUESTIONABLE', 'PROBABLE'):
+              player.set_value(0)
+            if level == 2 and record['severity'] in ('DOUBTFUL', 'OUT', 'QUESTIONABLE'):
+              player.set_value(0)
+            if level == 3 and record['severity'] in ('DOUBTFUL', 'OUT'):
+              player.set_value(0)
 
   def adjust_for_defenses(self, defense_list):
     ''' adjust for opponent defenses '''
