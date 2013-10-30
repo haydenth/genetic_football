@@ -7,7 +7,7 @@ What is this thing?
 
 For the unfamiliar, draftday.com is a psuedo-maybe-gambling website. Each week, you select a configuration of NFL players with a buy-in. The games happen and you get fantasy style points. Different games have different payouts but, in general, the more points you score, the better.
 
-What makes draftday unique (and computationally interesting) is that, for each player, there is a *cost constraint*. You're given a salary of usually $100,000 and you have to divvy it up among your team. For example, for a given week, the players will cost:
+What makes draftday unique (and computationally interesting) is that, for each player, there is a *cost constraint*. You're given a salary of usually $100,000 and you have to divvy it up among your team. For example, for a given week, the players have a cost (Salary) and a estimated performance (PPG = points per game). Here's some sample data:
 
 ```
 Position,PlayerName,Team,Opponent,Salary,PPG
@@ -20,6 +20,21 @@ QB,Matt Flynn,Bills,Saints,7400,5.1
 QB,Aaron Rodgers,Packers,Vikings,19450,25.6
 QB,Peyton Manning,Broncos,Redskins,23500,34.9
 ```
+
+Currently, this tool only supports games with **Games that have $100,000 salary and (QB, WR, WR, RB, RB, TE, FLEX, K, DEF) configurations**. Fortunately, this the majority of games on the site.
+
+
+How does it work?
+----------------------
+If you haven't noticed yet, Draftday.com is basically an NFL [Knapsack](http://en.wikipedia.org/wiki/Knapsack_problem). Knapsack is in NP, so it's hard problem to compute the optimal solution. One approach is using a genetic algorithm to at least quickly converge on some optimum.
+
+My algorithm is a very dumb genetic algorithm. Basically, the operation is like this:
+
+- Pick a random configuration (fill all positions randomly). Obtain fitness value (sum of PPGs)
+- Randomly change 1-7 players. Obtain new fitness value. If new > old, then this is new outcome. If not, try again.
+- Continue this process until we settle on some optimum that is hopefully a global optimum or close.
+
+This is not the most optimal way to do this. If I was smarter about making my random perturbations, I could probably considerably improve the algorithm. However, in practical experience, this reaches what appears to be a global optimum relatively quickly.
 
 Running the Optimizer
 -----------------------
