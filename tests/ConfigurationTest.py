@@ -12,6 +12,7 @@ class ConfigurationTest(unittest.TestCase):
     self.assertEquals(config.get_slots(), slots)   
 
   def test_configuration_adding_and_size(self):
+    ''' test that we can add to a configuration and obtain size '''
     slots = ['QB', 'RB', 'RB', 'WR', 'WR', 'TE', 'FLEX', 'K', 'D']
     config = Configuration(slots, 100000)
 
@@ -21,10 +22,10 @@ class ConfigurationTest(unittest.TestCase):
     config.add_player(player2, 'RB1')
     self.assertEquals(config.get_value(), 31)
     self.assertEquals(config.get_cost(), 31050)
-
     self.assertEquals(len(config.get_config()), len(slots))
 
   def test_adding_a_second_player(self):
+    ''' test that adding the same player twice throws an exception '''
     slots = ['QB', 'RB', 'RB', 'WR', 'WR', 'TE', 'FLEX', 'K', 'D']
     config = Configuration(slots, 100000)
 
