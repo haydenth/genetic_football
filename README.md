@@ -82,6 +82,7 @@ Requirements
 To run this, you need:
 * python 2.7 
 * urllib2 module (should be installed)
+* BeautifulSoup (for downloading injury data from CBS)
 
 Caveats
 ----------------------
