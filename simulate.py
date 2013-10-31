@@ -28,5 +28,5 @@ if args.defense:
 if args.injuries is not None:
   player_list.adjust_for_injuries(args.injuries)
 
-config = DraftDay().simulate(player_list, 50000)
+config = DraftDay().simulate(player_list)
 config.print_roster()

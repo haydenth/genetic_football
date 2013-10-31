@@ -6,10 +6,14 @@ from common.team import Teams
 from common.simulator import DefenseList
 from common.injuries import CBSInjuries
 
+
 class PlayerList(object):
+  ''' PlayerList is an object which consists of a list of all
+  the available players at all positions. it's a dictionary of
+  positions, with a dictionary of players (so it has fast lookup)'''
 
   DRAFTDAY_FIELDS = ['position', 'player_name', 'team', 'opp', 'salary', 'ppg']
-  CUSTOM_FIELDS = ['gsis_id', 'player_name', 'position', 
+  CUSTOM_FIELDS = ['gsis_id', 'player_name', 'position',
                    'games_played', 'ppg', 'stddev']
   CUSTOM_FIELDS2 = ['player_name', 'position', 'ppg']
   POSITIONS = ['QB', 'RB', 'WR', 'FLEX', 'D', 'K', 'TE']
@@ -45,16 +49,19 @@ class PlayerList(object):
     if level == 4:
       return
 
-    injury_list = CBSInjuries.CBSInjuries().fetch()
+    injury_list = CBSInjuries().fetch()
     for position in self._position_list:
       for player in self._player_list[position]:
         for record in injury_list:
           if record['name'] == player.get_name():
             if level == 0:
               player.set_value(0)
-            if level == 1 and record['severity'] in ('DOUBTFUL', 'OUT', 'QUESTIONABLE', 'PROBABLE'):
+            if level == 1 and record['severity'] in ('DOUBTFUL', 'OUT',
+                                                     'QUESTIONABLE',
+                                                     'PROBABLE'):
               player.set_value(0)
-            if level == 2 and record['severity'] in ('DOUBTFUL', 'OUT', 'QUESTIONABLE'):
+            if level == 2 and record['severity'] in ('DOUBTFUL', 'OUT',
+                                                     'QUESTIONABLE'):
               player.set_value(0)
             if level == 3 and record['severity'] in ('DOUBTFUL', 'OUT'):
               player.set_value(0)
@@ -92,34 +99,39 @@ class PlayerList(object):
     file_handler.next()  # skip header row
     csv_reader = csv.DictReader(file_handler, self.DRAFTDAY_FIELDS, ',')
     for line in csv_reader:
-      opponent = Teams.Teams().get_by_name(line['opp'])
-      player = Player(line['player_name'], line['position'], 
+      opponent = Teams().get_by_name(line['opp'])
+      player = Player(line['player_name'], line['position'],
                       line['ppg'], line['salary'], opponent)
       self.add_player(player)
 
   def read_from_custom_csv(self, csv_path):
+    ''' Read in a player list from a custom CSV file '''
     file_handler = open(csv_path, 'r')
     file_handler.next()  # skip header row
-    csv_reader = csv.DictReader(file_handler, self.CUSTOM_FIELDS, delimiter='\t')
+    csv_reader = csv.DictReader(file_handler, self.CUSTOM_FIELDS,
+                                delimiter='\t')
     for line in csv_reader:
       player = Player(line['player_name'], line['position'], line['ppg'])
       self.add_player(player)
 
   def read_from_custom_csv_simple(self, csv_path):
+    ''' Read in player list from a simpler custom CVS file '''
     file_handler = open(csv_path, 'r')
     file_handler.next()  # skip header row
-    csv_reader = csv.DictReader(file_handler, self.CUSTOM_FIELDS2, delimiter=',')
+    csv_reader = csv.DictReader(file_handler, self.CUSTOM_FIELDS2,
+                                delimiter=',')
     for line in csv_reader:
       player = Player(line['player_name'], line['position'], line['ppg'])
       self.add_player(player)
 
-
   def get_random_player(self, position=None):
-    """ return a random player from the list """
+    ''' return a random player from the list '''
     if position is not None:
-      position = re.search(r'[A-Z]*', position).group()  # remove any trailing digits
+      position = re.search(r'[A-Z]*', position).group()  # remove trailing digs
       random_spot = random.randint(0, len(self._player_list[position]) - 1)
       return self._player_list[position][random_spot]
     else:
-      position = self._position_list[random.randint(0, len(self._position_list) - 1)]
-      return self._player_list[position][random.randint(0, len(self._player_list))]
+      rand_to_perturb = random.randint(0, len(self._position_list) - 1)
+      position = self._position_list[rand_to_perturb]
+      rand_spot_on_list = random.randint(0, len(self._player_list))
+      return self._player_list[position][rand_spot_on_list]

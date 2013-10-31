@@ -2,6 +2,9 @@ import csv
 
 
 class DefenseList(object):
+  ''' This class holds the data structures for a defensive override
+  for changing player performance depending on opposing defenses '''
+
   _CUSTOM_FIELDS = ['team', 'expected_pa', 'player_adjustment']
 
   def __init__(self):
@@ -15,7 +18,7 @@ class DefenseList(object):
     handler = open(filename, 'r')
     csv_reader = csv.DictReader(handler, self._CUSTOM_FIELDS, delimiter=',')
     for line in csv_reader:
-      self.add_defense(line['team'], line['expected_pa'], 
+      self.add_defense(line['team'], line['expected_pa'],
                        line['player_adjustment'])
     handler.close()
 

@@ -20,7 +20,9 @@ class CBSInjuries(object):
         if len(cols) < 6:
           continue
 
-        (ds, pos, player, injury, nflstatus, news) = [str(col.contents[0]) for col in cols]
+        (ds, pos, player,
+         injury, nflstatus, news) = [str(col.contents[0]) for col in cols]
+
         player_name = re.search('\>(.*)\<', player).group(1)
         if re.search('Probable', news):
           severity = 'PROBABLE'
@@ -39,6 +41,8 @@ class CBSInjuries(object):
           severity = nflstatus
 
         ds = datetime.datetime.strptime(ds, '%m/%d/%y').date().isoformat()
-        player_results.append({'date':ds, 'position':pos, 'name':player_name, 'severity': severity,
-                               'injury': injury, 'nflstatus': nflstatus, 'news': news})
+        player_results.append({'date': ds, 'position': pos,
+                               'name': player_name, 'severity': severity,
+                               'injury': injury, 'nflstatus': nflstatus,
+                               'news': news})
     return player_results
