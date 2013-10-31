@@ -8,9 +8,11 @@ class Player(object):
     self._cost = cost
 
   def get_value(self):
+    ''' return the players value '''
     return float(self._value)
 
   def set_value(self, value):
+    ''' set the players value '''
     self._value = value
 
   def get_cost(self):
@@ -23,4 +25,5 @@ class Player(object):
     return self._position
 
   def get_name(self):
+    ''' return players name '''
     return self._name

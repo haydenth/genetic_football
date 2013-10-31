@@ -1,6 +1,6 @@
 import unittest
-from common import Configuration
-from common import Player
+from common.simulator import Configuration
+from common.player import Player
 
 
 class ConfigurationTest(unittest.TestCase):

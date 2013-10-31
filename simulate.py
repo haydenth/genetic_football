@@ -1,4 +1,5 @@
-from common import Player, PlayerList, Configuration, DraftDay, DefenseList
+from common.player import Player, PlayerList
+from common.simulator import Configuration, DraftDay, DefenseList
 import argparse
 import copy
 import random
@@ -8,7 +9,8 @@ parser = argparse.ArgumentParser(description='Simulate some drafts')
 parser.add_argument('--file', type=str, help='file to load', required=True)
 parser.add_argument('--defense', type=str, help='defense adj file to load')
 parser.add_argument('--override', type=str, help='point override custom file')
-parser.add_argument('--injuries', type=int, help='0-4, where 0 is no injuries and 4 is everyone')
+parser.add_argument('--injuries', type=int,
+                    help='0-4, where 0 is no injuries and 4 is everyone')
 args = parser.parse_args()
 
 player_list = PlayerList(PlayerList.POSITIONS)

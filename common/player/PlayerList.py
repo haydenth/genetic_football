@@ -1,10 +1,10 @@
 import csv
 import re
 import random
-from common import Player
-from common import Teams
-from common import DefenseList
-from common import CBSInjuries
+from common.player import Player
+from common.team import Teams
+from common.simulator import DefenseList
+from common.injuries import CBSInjuries
 
 class PlayerList(object):
 

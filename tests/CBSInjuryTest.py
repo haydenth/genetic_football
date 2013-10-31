@@ -1,5 +1,5 @@
 import unittest
-from common import CBSInjuries
+from common.injuries import CBSInjuries
 
 class CBSInjuryTest(unittest.TestCase):
 

@@ -1,8 +1,10 @@
 import copy
 import random
-from common import PlayerList, Configuration, DefenseList
+from common.player import PlayerList
+from common.simulator import Configuration, DefenseList
 
 class DraftDay(object):
+
   SLOTS = ['QB', 'RB1', 'RB2', 'WR1', 'WR2', 'TE', 'FLEX', 'K', 'D']
   DEFAULT_DEPTH = 50000
 

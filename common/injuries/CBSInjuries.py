@@ -1,14 +1,14 @@
 import re
 import datetime
 import BeautifulSoup
-from common import Scraper
+from common.scraper import Scraper
 
 
 class CBSInjuries(object):
   URL = 'http://www.cbssports.com/nfl/injuries'
 
   def fetch(self):
-    html = Scraper.Scraper().html(self.URL)
+    html = Scraper().html(self.URL)
     bs = BeautifulSoup.BeautifulSoup(html)
     data_tables = bs.findAll('table', {'class': 'data'})
 

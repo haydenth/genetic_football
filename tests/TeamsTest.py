@@ -1,5 +1,5 @@
 import unittest
-from common import Teams
+from common.team import Teams
 
 
 class TeamsTest(unittest.TestCase):

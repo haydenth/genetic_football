@@ -1,6 +1,6 @@
 import unittest
-from common import PlayerList
-from common import Player
+from common.player import PlayerList
+from common.player import Player
 
 
 class PlayerListTest(unittest.TestCase):
